@@ -1,0 +1,6 @@
+@import "../../theme/variables.scss";
+
+.disabled {
+  filter: blur(3px);
+  cursor: not-allowed !important;
+}

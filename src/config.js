@@ -15,12 +15,10 @@ module.exports = Object.assign({
   apiHost: process.env.APIHOST || 'localhost',
   apiPort: process.env.APIPORT,
   app: {
-    title: 'React Redux Example',
-    description: 'All the modern best practices in one example.',
+    title: 'Data Science School',
     head: {
-      titleTemplate: 'React Redux Example: %s',
+      titleTemplate: 'Data Science School: %s',
       meta: [
-        {name: 'description', content: 'All the modern best practices in one example.'},
         {charset: 'utf-8'},
         {property: 'og:site_name', content: 'Data Science School'},
         {property: 'og:title', content: 'Data Science School'},
