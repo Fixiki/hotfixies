@@ -30,7 +30,25 @@ export default class Home extends Component {
         </div>
 
         <div className="container">
-          Boilerplate
+          <h1>Some awesome header</h1>
+          <div className="col-xs-12">Some awesome subheader and cool cal to action</div>
+          <p/>
+          <p/>
+          <p/>
+          <p/>
+          <p/>
+          <div className="col-xs-4 text-center">
+            <div><i className="fa fa-user fa-5x" aria-hidden="true" /></div>
+            WHY WE ARE COOL #1
+          </div>
+          <div className="col-xs-4 text-center">
+            <div><i className="fa fa-user fa-5x" aria-hidden="true" /></div>
+            WHY WE ARE COOL #2
+          </div>
+          <div className="col-xs-4 text-center">
+            <div><i className="fa fa-user fa-5x" aria-hidden="true" /></div>
+            WHY WE ARE COOL #3
+          </div>
         </div>
       </div>
     );
