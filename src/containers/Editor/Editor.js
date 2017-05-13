@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux';
 import Dropzone from 'react-dropzone'
 
-export default class Editor extends Component {
+class Editor extends Component {
 
   constructor(props) {
     super(props);
@@ -12,10 +13,20 @@ export default class Editor extends Component {
   }
 
   onDrop(files) {
-    if(files.length > 1){
+    if (files.length > 1) {
       alert('Only one file upload allowed, loading only first file');
     }
     this.setState({ files });
+  }
+
+  onSubmit() {
+    let data = new FormData();
+    data.append('file', this.state.files[0]);
+    fetch('http://localhost:3030/file', {
+      method: 'POST',
+      body: data,
+      mode: 'no-cors'
+    })
   }
 
   render() {
@@ -28,7 +39,17 @@ export default class Editor extends Component {
         <ul>
           {this.state.files.map(f => <li>{f.name} - {f.size} bytes</li>)}
         </ul>
+        <p>
+          <button onClick={this.onSubmit.bind(this)} type="button" className="btn btn-primary btn-lg">Enroll now
+          </button>
+        </p>
       </div>
     );
   }
 }
+
+const mapStateToProps = (state) => ({
+  status: state.processing,
+});
+
+export default connect(mapStateToProps)(Editor)

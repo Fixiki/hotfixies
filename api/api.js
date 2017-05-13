@@ -8,7 +8,7 @@ import PrettyError from 'pretty-error';
 import http from 'http';
 import SocketIo from 'socket.io';
 import multer from 'multer';
-import socketHandler from './socket';
+import socketHandler, { connection } from './socket';
 
 const pretty = new PrettyError();
 const app = express();
@@ -27,10 +27,18 @@ app.use(session({
 }));
 app.use(bodyParser.json());
 
-app.post('/file',upload.any(), (req, res, next) => {
-  console.log('files',req.files);
-  console.log(fetch);
-  res.json({status:'ok'});
+app.post('/file', upload.any(), (req, res, next) => {
+  console.log('files', req.files);
+  //console.log('connection', connection);
+  if (connection) {
+    connection.emit('processing', {
+      display: true,
+      message: 'File processing started...',
+      status: 'pending',
+      level: 'info'
+    })
+  }
+  res.json({ status: 'ok' });
 });
 
 app.use((req, res) => {
@@ -58,11 +66,6 @@ app.use((req, res) => {
     res.status(404).end('NOT FOUND');
   }
 });
-
-
-const bufferSize = 100;
-const messageBuffer = new Array(bufferSize);
-let messageIndex = 0;
 
 if (config.apiPort) {
   const runnable = app.listen(config.apiPort, (err) => {
