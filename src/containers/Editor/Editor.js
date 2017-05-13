@@ -7,6 +7,7 @@ class Editor extends Component {
   constructor(props) {
     super(props);
     this.onDrop = this.onDrop.bind(this);
+    console.log('props',props);
     this.state = {
       files: [],
     }

@@ -4,6 +4,7 @@ import {
   App,
   Home,
   Editor,
+  Syllabus,
   Widgets,
   NotFound,
 } from './containers';
@@ -15,7 +16,8 @@ export default (store) => {
       <IndexRoute component={Home}/>
 
       { /* Routes */ }
-      <Route path="code" component={Editor}/>
+      <Route path="syllabus" component={Syllabus}/>
+      <Route path="syllabus/:modelId/view" component={Editor}/>
       <Route path="widgets" component={Widgets}/>
 
       { /* Catch all route */ }

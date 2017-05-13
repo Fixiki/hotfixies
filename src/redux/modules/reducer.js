@@ -6,6 +6,7 @@ import info from './info';
 import widgets from './widgets';
 import time from './time';
 import processing from './processing';
+import datasets from './datasets';
 
 export default combineReducers({
   routing: routerReducer,
@@ -13,5 +14,6 @@ export default combineReducers({
   info,
   widgets,
   time,
-  processing
+  processing,
+  datasets,
 });
