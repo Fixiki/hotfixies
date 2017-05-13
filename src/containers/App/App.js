@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { IndexLink } from 'react-router';
 import { LinkContainer } from 'react-router-bootstrap';
+import moment from 'moment';
 import Navbar from 'react-bootstrap/lib/Navbar';
 import Nav from 'react-bootstrap/lib/Nav';
 import NavItem from 'react-bootstrap/lib/NavItem';
@@ -14,7 +15,6 @@ import { asyncConnect } from 'redux-async-connect';
 @asyncConnect([{
   promise: ({store: {dispatch, getState}}) => {
     const promises = [];
-
     if (!isInfoLoaded(getState())) {
       promises.push(dispatch(loadInfo()));
     }
@@ -23,7 +23,7 @@ import { asyncConnect } from 'redux-async-connect';
   }
 }])
 @connect(
-  state => ({}),
+  state => ({time:state.time.serverTime}),
   {pushState: push})
 export default class App extends Component {
   static propTypes = {
@@ -34,12 +34,6 @@ export default class App extends Component {
 
   static contextTypes = {
     store: PropTypes.object.isRequired
-  };
-
-
-  handleLogout = (event) => {
-    event.preventDefault();
-    this.props.logout();
   };
 
   render() {
@@ -65,15 +59,6 @@ export default class App extends Component {
               <LinkContainer to="/widgets">
                 <NavItem eventKey={2}>Widgets</NavItem>
               </LinkContainer>
-              <LinkContainer to="/survey">
-                <NavItem eventKey={3}>Survey</NavItem>
-              </LinkContainer>
-              <LinkContainer to="/pagination">
-                <NavItem eventKey={4}>Pagination</NavItem>
-              </LinkContainer>
-              <LinkContainer to="/about">
-                <NavItem eventKey={5}>About Us</NavItem>
-              </LinkContainer>
 
             </Nav>
 
@@ -84,12 +69,8 @@ export default class App extends Component {
           {this.props.children}
         </div>
 
-        <div className="well text-center">
-          Have questions? Ask for help <a
-          href="https://github.com/erikras/react-redux-universal-hot-example/issues"
-          target="_blank">on Github</a> or in the <a
-          href="https://discord.gg/0ZcbPKXt5bZZb1Ko" target="_blank">#react-redux-universal</a> Discord channel.
-        </div>
+        <div>Current time {moment(this.props.time).format("HH:mm:ss")}</div>
+
       </div>
     );
   }

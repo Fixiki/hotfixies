@@ -17,12 +17,11 @@
   }
   .logo {
     $size: 200px;
-    margin: auto;
+    margin: 10px auto auto;
     height: $size;
     width: $size;
     border-radius: $size / 2;
-    border: 1px solid $cyan;
-    box-shadow: inset 0 0 10px $cyan;
+    border: 4px solid white;
     vertical-align: middle;
     p {
       line-height: $size;
@@ -34,7 +33,6 @@
     }
   }
   h1 {
-    color: $cyan;
     font-size: 4em;
   }
   h2 {
