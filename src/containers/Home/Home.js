@@ -31,7 +31,7 @@ export default class Home extends Component {
 
         <div className="container">
           <h1>Some awesome header</h1>
-          <div className="col-xs-12">Some awesome subheader and cool cal to action</div>
+          <div className="col-xs-12">Наберись практического опыта как мы набрались редбулла</div>
           <p/>
           <p/>
           <p/>
@@ -39,15 +39,15 @@ export default class Home extends Component {
           <p/>
           <div className="col-xs-4 text-center">
             <div><i className="fa fa-user fa-5x" aria-hidden="true" /></div>
-            WHY WE ARE COOL #1
+            Теория подкрепленная задачами
           </div>
           <div className="col-xs-4 text-center">
             <div><i className="fa fa-user fa-5x" aria-hidden="true" /></div>
-            WHY WE ARE COOL #2
+            Реальные датасеты
           </div>
           <div className="col-xs-4 text-center">
             <div><i className="fa fa-user fa-5x" aria-hidden="true" /></div>
-            WHY WE ARE COOL #3
+            Силлабус, собрынный угашеными студиками на хакатоне
           </div>
         </div>
       </div>
