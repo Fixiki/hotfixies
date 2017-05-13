@@ -9,9 +9,6 @@ import {
 } from './containers';
 
 export default (store) => {
-  /**
-   * Please keep routes in alphabetical order
-   */
   return (
     <Route path="/" component={App}>
       { /* Home (main) route */ }

@@ -31,16 +31,31 @@ class Editor extends Component {
 
   render() {
     const styles = require('./Editor.scss');
+    const alert = this.props.status;
     return (
-      <div className={styles.home}>
-        <Dropzone accept='.py' multiple={false} onDrop={this.onDrop.bind(this)}>
-          <p>Try dropping some files here, or click to select files to upload.</p>
-        </Dropzone>
-        <ul>
-          {this.state.files.map(f => <li>{f.name} - {f.size} bytes</li>)}
-        </ul>
+      <div className="container">
+
+        {alert.display &&
+        <div className={`col-xs-12 alert alert-${alert.level}`} role="alert">
+          <strong>{alert.status} !!!</strong>
+          {alert.message}
+        </div>
+        }
+        <div className={styles.dropzone}>
+          <Dropzone accept='.py' multiple={false} onDrop={this.onDrop.bind(this)}>
+            <p>Drop your file here</p>
+          </Dropzone>
+        </div>
+        {this.state.files.length > 0 &&
+        <div>
+          <p/>
+          Selected file:
+          <ul>{this.state.files.map(f => <li>{f.name} - {f.size} bytes</li>)}</ul>
+        </div>}
+        <p/>
         <p>
-          <button onClick={this.onSubmit.bind(this)} type="button" className="btn btn-primary btn-lg">Enroll now
+          <button onClick={this.onSubmit.bind(this)} type="button" className="btn btn-primary btn-lg btn-block">
+            Submit
           </button>
         </p>
       </div>

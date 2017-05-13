@@ -7,7 +7,7 @@ export default (store) => {
   const { dispatch, getState } = store;
   const socket = io('', { path: '/ws' });
   socket.on('time', (data) => {
-    //dispatch(updateTime(data));
+    dispatch(updateTime(data));
   });
 
   socket.on('processing',(data)=> {

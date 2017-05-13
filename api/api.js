@@ -37,6 +37,14 @@ app.post('/file', upload.any(), (req, res, next) => {
       status: 'pending',
       level: 'info'
     })
+    setTimeout(()=> {
+      connection.emit('processing', {
+        display: true,
+        message: 'FINISHEEEEEED',
+        status: 'AZZZAZA',
+        level: 'success'
+      })
+    },5000)
   }
   res.json({ status: 'ok' });
 });

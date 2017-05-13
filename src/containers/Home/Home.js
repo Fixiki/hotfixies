@@ -22,7 +22,7 @@ export default class Home extends Component {
             </div>
             <h1>Data Science School</h1>
 
-            <h2>Become a data scientist much easier</h2>
+            <h2>Learn. Do. Earn.</h2>
             <p>
               <button type="button" className="btn btn-primary btn-lg">Enroll now</button>
             </p>

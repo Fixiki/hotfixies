@@ -5,3 +5,11 @@
     margin-bottom: 15px;
   }
 }
+
+.dropzone {
+  padding-top: 1em;
+}
+
+.dropzone > div {
+  width: 100% !important;
+}
