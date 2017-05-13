@@ -13,16 +13,6 @@ class Syllabus extends Component {
     this.state = {}
   }
 
-  onSubmit() {
-    let data = new FormData();
-    data.append('file', this.state.files[0]);
-    fetch('http://localhost:3030/file', {
-      method: 'POST',
-      body: data,
-      mode: 'no-cors'
-    })
-  }
-
   render() {
     return (
       <div className="container">
