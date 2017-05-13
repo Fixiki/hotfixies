@@ -3,14 +3,16 @@ import session from 'express-session';
 import bodyParser from 'body-parser';
 import config from '../src/config';
 import * as actions from './actions/index';
-import {mapUrl} from 'utils/url.js';
+import { mapUrl } from 'utils/url.js';
 import PrettyError from 'pretty-error';
 import http from 'http';
 import SocketIo from 'socket.io';
+import multer from 'multer';
 import socketHandler from './socket';
 
 const pretty = new PrettyError();
 const app = express();
+const upload = multer({ dest: 'uploads' });
 
 const server = new http.Server(app);
 
@@ -25,11 +27,16 @@ app.use(session({
 }));
 app.use(bodyParser.json());
 
+app.post('/file',upload.any(), (req, res, next) => {
+  console.log('files',req.files);
+  console.log(fetch);
+  res.json({status:'ok'});
+});
 
 app.use((req, res) => {
   const splittedUrlPath = req.url.split('?')[0].split('/').slice(1);
 
-  const {action, params} = mapUrl(actions, splittedUrlPath);
+  const { action, params } = mapUrl(actions, splittedUrlPath);
 
   if (action) {
     action(req, params)
@@ -66,7 +73,7 @@ if (config.apiPort) {
     console.info('==> 💻  Send requests to http://%s:%s', config.apiHost, config.apiPort);
   });
 
-  io.on('connection',socketHandler);
+  io.on('connection', socketHandler);
   io.listen(runnable);
 } else {
   console.error('==>     ERROR: No PORT environment variable has been specified');
