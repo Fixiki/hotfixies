@@ -3,18 +3,18 @@ import session from 'express-session';
 import bodyParser from 'body-parser';
 import config from '../src/config';
 import * as actions from './actions/index';
-import { mapUrl } from 'utils/url.js';
+import {mapUrl} from 'utils/url.js';
 import PrettyError from 'pretty-error';
 import http from 'http';
 import SocketIo from 'socket.io';
 import path from 'path';
 import multer from 'multer';
 import PythonShell from 'python-shell';
-import socketHandler, { connection } from './socket';
+import socketHandler, {connection} from './socket';
 
 const pretty = new PrettyError();
 const app = express();
-const upload = multer({ dest: 'uploads' });
+const upload = multer({dest: 'uploads'});
 
 const server = new http.Server(app);
 
@@ -25,7 +25,7 @@ app.use(session({
   secret: 'react and redux rule!!!!',
   resave: false,
   saveUninitialized: false,
-  cookie: { maxAge: 60000 }
+  cookie: {maxAge: 60000}
 }));
 app.use(bodyParser.json());
 
@@ -39,23 +39,25 @@ app.post('/file', upload.any(), (req, res, next) => {
       status: 'pending',
       level: 'info'
     });
-    const pyshell = new PythonShell(path.join(__dirname,'processor/score_script.py'),{
-      args:['dataset','iris']
+    const pyshell = new PythonShell(path.join(__dirname, 'processor/score_script.py'), {
+      args: ['function', 'iris', path.join(__dirname, 'processor','temp.py'), 'evaluate_algo']
     });
     console.log('Started proccessing');
 
     pyshell.on('message', function (message) {
       const messages = message.split(':');
-      if(messages[0] === 'Try'){
+      console.log(message);
+      if (messages[0] === 'Try') {
         const status = messages[1].split('/');
         connection.emit('processing:progress', {
-          progress:status[0]/status[1],
+          progress: status[0] / status[1],
         });
       }
-      if(messages[0] === 'Result') {
+      if (messages[0] === 'Result') {
+        let grade = messages[1] > 0.3 && messages[1] < 0.4? 'Bronze' : 'Silver';
         connection.emit('processing', {
           display: true,
-          message: `File processing finished. Grade: ${messages[1]}`,
+          message: `File processing finished. Grade: ${messages[1]} (${grade}) `,
           status: 'success',
           level: 'success'
         });
@@ -63,6 +65,7 @@ app.post('/file', upload.any(), (req, res, next) => {
     });
 
     pyshell.end(function (err) {
+      console.log('finished');
       if (err) {
         connection.emit('processing', {
           display: true,
@@ -73,15 +76,16 @@ app.post('/file', upload.any(), (req, res, next) => {
         console.error(err);
         throw err;
       }
+
     });
   }
-  res.json({ status: 'ok' });
+  res.json({status: 'ok'});
 });
 
 app.use((req, res) => {
   const splittedUrlPath = req.url.split('?')[0].split('/').slice(1);
 
-  const { action, params } = mapUrl(actions, splittedUrlPath);
+  const {action, params} = mapUrl(actions, splittedUrlPath);
 
   if (action) {
     action(req, params)

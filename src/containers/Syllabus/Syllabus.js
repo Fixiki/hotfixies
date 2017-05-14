@@ -21,9 +21,9 @@ class Syllabus extends Component {
           <div className={cx('col-xs-4')}>
             <div className="thumbnail">
               {/*<img src="..." alt="...">*/}
-              <div className={cx('caption',item.unavailable && styles.disabled)}>
+              <div className={cx('caption',styles.item,item.unavailable && styles.disabled)}>
                 <h3>{item.name}</h3>
-                <p>{item.description}</p>
+                <p>{item.description.slice(0,100)}...</p>
                 <p>
                   <Link className={cx('btn btn-default btn-block',item.unavailable && 'disabled')}
                         role="button" to={`syllabus/${item.id}/view`}>

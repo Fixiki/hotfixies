@@ -6,7 +6,7 @@
   }
 }
 .masthead {
-  background-size:100%;
+  background-size:cover;
   background: #2d2d2d url('./bg.jpeg') no-repeat fixed;
   padding: 40px 20px;
   color: white;
@@ -52,6 +52,14 @@
       color: $humility;
     }
   }
+}
+
+.syll {
+  margin-top: 200px;
+  width: 100%;
+  color: white;
+  background: #2d2d2d url('./3d_edited.jpg') no-repeat fixed;
+  //background-color: rgb(33,33,33);
 }
 
 .counterContainer {

@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router';
+import React, {Component} from 'react';
+import {Link} from 'react-router';
 import cx from 'classnames';
 import config from '../../config';
 import Helmet from 'react-helmet';
@@ -14,7 +14,7 @@ export default class Home extends Component {
       <div className={styles.home}>
         <Helmet title="Home"/>
         <div className={styles.masthead}>
-          <div className={cx('container',styles.info)}>
+          <div className={cx('container', styles.info)}>
             <div className={styles.logo}>
               <p>
                 <img src={logoImage}/>
@@ -30,26 +30,67 @@ export default class Home extends Component {
         </div>
 
         <div className="container">
-          <h1>Some awesome header</h1>
-          <div className="col-xs-12">Наберись практического опыта как мы набрались редбулла</div>
+          <h1>Что мы предлагаем</h1>
+          <div className="col-xs-12" style={{marginBottom: 20}}>
+            <small>Наберись практического опыта как мы набрались редбулла</small>
+          </div>
           <p/>
           <p/>
-          <p/>
+          <p />
           <p/>
           <p/>
           <div className="col-xs-4 text-center">
-            <div><i className="fa fa-user fa-5x" aria-hidden="true" /></div>
-            Теория подкрепленная задачами
+            <div><i className="fa fa-balance-scale fa-5x" aria-hidden="true"/></div>
+            <h2>Теория подкрепленная задачами</h2>
           </div>
           <div className="col-xs-4 text-center">
-            <div><i className="fa fa-user fa-5x" aria-hidden="true" /></div>
-            Реальные датасеты
+            <div><i className="fa fa-bar-chart fa-5x" aria-hidden="true"/></div>
+            <h2>Реальные датасеты</h2>
           </div>
           <div className="col-xs-4 text-center">
-            <div><i className="fa fa-user fa-5x" aria-hidden="true" /></div>
-            Силлабус, собрынный угашеными студиками на хакатоне
+            <div><i className="fa fa-bullseye fa-5x" aria-hidden="true"/></div>
+            <h2>Силлабус, собранный угашеными студиками на хакатоне</h2>
           </div>
         </div>
+
+        <section className={styles.syll}>
+          <div className="row">
+            <h1 className="text-center">Из чего состоит курс:</h1>
+          </div>
+          <div className="container">
+            <div className="row">
+              <div className="col-xs-3">
+                <h2>Питон</h2>
+                <hr/>
+                <h3> - Подушим твоего змея</h3>
+                <h3> - Задачки порещаем там</h3>
+                <h3> - Штуки всякие</h3>
+              </div>
+              <div className="col-xs-3">
+                <h2>Библиотеки для пайтона</h2>
+                <hr/>
+                <h3> - Numpy, Pandas - манипуляция данными</h3>
+                <h3> - Matplotlib - визуализация</h3>
+                <h3> - Scipy, Scikit-learn - анализ и обучение моделей</h3>
+              </div>
+              <div className="col-xs-3">
+                <h2>Матан</h2>
+                <hr/>
+                <h3> - Линейная алгебра</h3>
+                <h3> - Высшая математика (для людей)</h3>
+                <h3> - Минимальный курс статистики</h3>
+              </div>
+              <div className="col-xs-3">
+                <h2>Глубокое обучение</h2>
+                <hr/>
+                <h3> - Набор моделей для каждого кейса</h3>
+                <h3> - Керас как либа для старта в глубоком обучении</h3>
+              </div>
+            </div>
+          </div>
+        </section>
+
+
       </div>
     );
   }
