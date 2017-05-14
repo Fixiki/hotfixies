@@ -7,7 +7,9 @@ import { mapUrl } from 'utils/url.js';
 import PrettyError from 'pretty-error';
 import http from 'http';
 import SocketIo from 'socket.io';
+import path from 'path';
 import multer from 'multer';
+import PythonShell from 'python-shell';
 import socketHandler, { connection } from './socket';
 
 const pretty = new PrettyError();
@@ -36,15 +38,42 @@ app.post('/file', upload.any(), (req, res, next) => {
       message: 'File processing started...',
       status: 'pending',
       level: 'info'
-    })
-    setTimeout(()=> {
-      connection.emit('processing', {
-        display: true,
-        message: 'FINISHEEEEEED',
-        status: 'AZZZAZA',
-        level: 'success'
-      })
-    },5000)
+    });
+    const pyshell = new PythonShell(path.join(__dirname,'processor/score_script.py'),{
+      args:['dataset','iris']
+    });
+    console.log('Started proccessing');
+
+    pyshell.on('message', function (message) {
+      const messages = message.split(':');
+      if(messages[0] === 'Try'){
+        const status = messages[1].split('/');
+        connection.emit('processing:progress', {
+          progress:status[0]/status[1],
+        });
+      }
+      if(messages[0] === 'Result') {
+        connection.emit('processing', {
+          display: true,
+          message: `File processing finished. Grade: ${messages[1]}`,
+          status: 'success',
+          level: 'success'
+        });
+      }
+    });
+
+    pyshell.end(function (err) {
+      if (err) {
+        connection.emit('processing', {
+          display: true,
+          message: 'Error occured',
+          status: 'error',
+          level: 'error'
+        });
+        console.error(err);
+        throw err;
+      }
+    });
   }
   res.json({ status: 'ok' });
 });

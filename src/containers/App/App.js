@@ -45,7 +45,7 @@ export default class App extends Component {
         <Navbar fixedTop>
           <Navbar.Header>
             <Navbar.Brand>
-              <IndexLink to="/" activeStyle={{color: '#33e0ff'}}>
+              <IndexLink to="/">
                 <div className={styles.brand}/>
                 <span>Data Science School</span>
               </IndexLink>
