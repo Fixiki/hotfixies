@@ -68,7 +68,7 @@ export default class App extends Component {
           {this.props.children}
         </div>
 
-        <div>Current time {moment(this.props.time).format("HH:mm:ss")}</div>
+        {/*<div>Current time {moment(this.props.time).format("HH:mm:ss")}</div>*/}
 
       </div>
     );
