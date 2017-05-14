@@ -7,6 +7,7 @@ import { mapUrl } from 'utils/url.js';
 import PrettyError from 'pretty-error';
 import http from 'http';
 import SocketIo from 'socket.io';
+import path from 'path';
 import multer from 'multer';
 import PythonShell from 'python-shell';
 import socketHandler, { connection } from './socket';
@@ -38,7 +39,7 @@ app.post('/file', upload.any(), (req, res, next) => {
       status: 'pending',
       level: 'info'
     });
-    const pyshell = new PythonShell('./processor/processor.py',{
+    const pyshell = new PythonShell(path.join(__dirname,'processor/score_script.py'),{
       args:['dataset','iris']
     });
     console.log('Started proccessing');
@@ -69,6 +70,7 @@ app.post('/file', upload.any(), (req, res, next) => {
           status: 'error',
           level: 'error'
         });
+        console.error(err);
         throw err;
       }
     });
