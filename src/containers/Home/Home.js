@@ -49,7 +49,7 @@ export default class Home extends Component {
           </div>
           <div className="col-xs-4 text-center">
             <div><i className="fa fa-bullseye fa-5x" aria-hidden="true"/></div>
-            <h2>Силлабус, собранный угашеными студиками на хакатоне</h2>
+            <h2>Постоянна обновляемая база знаний</h2>
           </div>
         </div>
 
